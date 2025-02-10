@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "TB_GAME")
@@ -78,5 +79,18 @@ public class Game implements Serializable {
 
     public void setGenres(String genres) {
         this.genres = genres;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Game game = (Game) o;
+        return Objects.equals(id, game.id) && Objects.equals(name, game.name) && Objects.equals(releaseDate, game.releaseDate) && Objects.equals(availableSystems, game.availableSystems) && Objects.equals(price, game.price) && Objects.equals(genres, game.genres);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, releaseDate, availableSystems, price, genres);
     }
 }
