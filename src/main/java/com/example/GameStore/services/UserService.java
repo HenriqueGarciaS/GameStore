@@ -1,6 +1,7 @@
 package com.example.GameStore.services;
 
 import com.example.GameStore.VOs.UserVO;
+import com.example.GameStore.exceptions.ResourceNotFoundException;
 import com.example.GameStore.models.User;
 import com.example.GameStore.models.Wallet;
 import com.example.GameStore.repositories.UserRepository;
@@ -26,7 +27,9 @@ public class UserService {
 
     public User findById(Long id){
         Optional<User> user = userRepository.findById(id);
-        return user.orElseGet(User::new);
+        if(user.isEmpty())
+            throw new ResourceNotFoundException("user not found");
+        return user.get();
     }
 
     public User createUser(UserVO userVO){
