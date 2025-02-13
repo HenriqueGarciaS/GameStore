@@ -20,7 +20,7 @@ public class GameController {
     }
 
     @GetMapping("/{id}")
-    public Game findbyId(@PathVariable(name = "id") long id){
+    public Game findById(@PathVariable(name = "id") long id){
         return gameService.findById(id);
     }
 
